@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -5,13 +6,17 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    # Ensure the instance folder exists
-    try:
-        os.makedirs(app.instance_path)
-    except OSError:
-        pass
+    # Vercel filesystem is read-only. Use /tmp for the database.
+    if os.environ.get('VERCEL'):
+        db_path = os.path.join('/tmp', 'gcb_monitor.db')
+    else:
+        try:
+            os.makedirs(app.instance_path)
+        except OSError:
+            pass
+        db_path = os.path.join(app.instance_path, 'gcb_monitor.db')
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(app.instance_path, 'gcb_monitor.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + db_path
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
     db.init_app(app)

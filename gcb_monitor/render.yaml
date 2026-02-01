@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: gcb-monitor
+    env: python
+    pythonCommand: python3
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn run:app
+    envVars:
+      - key: PORT
+        value: 10000
