@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCB Branch Monitoring System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-text">GCB</span> Monitor
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="#"><i class="icon-dashboard"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="icon-analytics"></i> Reports</a></li>
+                    <li><a href="#"><i class="icon-settings"></i> Settings</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>System Ver: 1.0.4</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h1>Branch Network Optimization</h1>
+                <div class="user-profile">
+                    <span class="status-dot online"></span> Admin Panel
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- ATM Status Panel -->
+                <div class="card atm-card">
+                    <div class="card-header">
+                        <h3>ATM Status</h3>
+                        <span id="atm-global-status" class="badge">Checking...</span>
+                    </div>
+                    <div id="atm-list" class="atm-list">
+                        <!-- ATM items will be injected here -->
+                        <div class="loading">Loading ATM data...</div>
+                    </div>
+                </div>
+
+                <!-- Network Performance -->
+                <div class="card network-card">
+                    <div class="card-header">
+                        <h3>Network Health</h3>
+                        <span id="network-latency" class="latency-value">-- ms</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="networkChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Alerts & Notifications -->
+                <div class="card alerts-card">
+                    <div class="card-header">
+                        <h3>Critical Alerts</h3>
+                        <button class="btn-text">Clear All</button>
+                    </div>
+                    <div id="alert-list" class="alert-list">
+                        <!-- Alerts will be injected here -->
+                        <div class="loading">Fetching alerts...</div>
+                    </div>
+                </div>
+
+                <!-- Digital Services -->
+                <div class="card services-card">
+                    <div class="card-header">
+                        <h3>Digital Services</h3>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <span class="label">Mobile Banking</span>
+                            <span class="status pulse-green">UP</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="label">Internet Banking</span>
+                            <span class="status pulse-green">UP</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="label">GIP Transfers</span>
+                            <span class="status pulse-orange">IDLE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
